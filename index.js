@@ -7,8 +7,9 @@ const homeRoutes = require('./routes/home');
 const cardRoutes = require('./routes/card');
 const addRoutes = require('./routes/add');
 const coursesRoutes = require('./routes/courses');
+const ordersRoutes = require('./routes/orders');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
-const User = require('./modules/user');
+const User = require('./models/user');
 
 const app = express()
 
@@ -18,9 +19,19 @@ const hbs = exphbs.create({
   handlebars: allowInsecurePrototypeAccess(Handlebars)
 });
 
-app.engine('hbs', hbs.engine)
-app.set('view engine', 'hbs')
-app.set('views', 'views')
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
+app.set('views', 'views');
+
+app.use(async (req, res, next) => {
+  try {
+    const user = await User.findById('60bdf9a6f6a3152998a0e87b')
+    req.user = user
+    next()
+  } catch (e) {
+    console.log(e)
+  }
+});
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({
@@ -31,6 +42,7 @@ app.use('/', homeRoutes);
 app.use('/add', addRoutes);
 app.use('/courses', coursesRoutes);
 app.use('/card', cardRoutes);
+app.use('/orders', ordersRoutes);
 
 const PORT = process.env.PORT || 3000
 
