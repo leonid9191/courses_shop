@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 
     const courses = mapCartItems(user.cart);
     res.render('card', {
-        title: 'Корзина',
+        title: 'Cart',
         isCard: true,
         courses: courses,
         price: computePrice(courses)
