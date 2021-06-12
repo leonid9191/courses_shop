@@ -42,7 +42,7 @@
             </form>
         </div>
         <div id='register' class='col s6 offset-s3'>
-            <form action='/add/register' method='POST'>
+            <form action='/auth/register' method='POST'>
                 <div class='input-field'>
                     <input
                         id='remail'
@@ -53,6 +53,22 @@
                     />
                     <label for='remail'>E-mail</label>
                     <span class='helper-text' data-error='Enter email'></span>
+                </div>
+
+                
+                <div class='input-field'>
+                    <input
+                        id='name'
+                        name='name'
+                        type='text'
+                        class='validate'
+                        required
+                    />
+                    <label for='name'>Your Name</label>
+                    <span
+                        class='helper-text'
+                        data-error='Enter your name'
+                    ></span>
                 </div>
 
                 <div class='input-field'>
@@ -84,7 +100,10 @@
                     ></span>
                 </div>
 
-                <button class='btn btn-primary' type='submit'>Registration</button>
+                <button
+                    class='btn btn-primary'
+                    type='submit'
+                >Registration</button>
             </form>
         </div>
     </div>
